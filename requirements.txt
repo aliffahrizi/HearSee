@@ -4,3 +4,4 @@ soundfile
 sounddevice
 PySide6
 pyqtgraph
+matplotlib
