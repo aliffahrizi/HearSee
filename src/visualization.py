@@ -1,9 +1,9 @@
 import matplotlib.pyplot as plt
 
 
-def plot_spectrogram(t, f, magnitude_db, song_name):
+def plot_spectrogram(t, f, magnitude_db, song_name, figsize=(20,10)):
 
-    fig, ax = plt.subplots()
+    fig, ax = plt.subplots(figsize=figsize)
     mesh = ax.pcolormesh(
         t,
         f,

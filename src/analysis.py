@@ -1,7 +1,9 @@
 from scipy.signal import stft
 import numpy as np
 
-def calculate_stft(audio, sample_rate, nperseg = 2048, noverlap=1024):
+def calculate_stft(audio, sample_rate):
+    nperseg = 2048 * 8
+    noverlap = nperseg // 2
     f, t, Zxx = stft(
         audio, 
         fs=sample_rate, 

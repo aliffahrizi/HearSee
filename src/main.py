@@ -54,9 +54,9 @@ def mouse_move(event):
             magnitude_db
         )
 
-        info_text.set_text(
-            f"Time: {mouse_time:.2f} s\n"
-            f"Frequency: {mouse_freq:.1f} Hz\n"
+        print(
+            f"Time: {mouse_time:.2f} s |"
+            f"Frequency: {mouse_freq:.1f} Hz |"
             f"Magnitude: {magnitude:.1f} dB"
         )
 
@@ -70,18 +70,30 @@ fig.canvas.mpl_connect(
 
 # plt.show()
 plt.show(block=False)
-
 plt.pause(1)
 
+fig.canvas.draw()
+background = fig.canvas.copy_from_bbox(ax.bbox)
+
 sd.play(audio[:n_samples, :], sampleRate)
-# start_time = time.perf_counter()
+start_time = time.perf_counter()
 
-# while sd.get_stream().active:
-#     elapsed = time.perf_counter() - start_time
-#     update_cursor(cursor, elapsed)
-#     # cursor.set_xdata([elapsed, elapsed])
+while sd.get_stream().active:
+    elapsed = time.perf_counter() - start_time
 
-#     plt.pause(0.01)
+    fig.canvas.restore_region(background)
+
+    update_cursor(cursor, elapsed)
+
+    ax.draw_artist(cursor)
+
+    fig.canvas.blit(ax.bbox)
+    fig.canvas.flush_events()
+ 
+#     print(
+#     f"elapsed: {elapsed:.3f} | "
+#     f"cursor: {elapsed:.3f}"
+# )
 
 sd.wait()
 plt.close()
