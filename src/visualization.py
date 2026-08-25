@@ -1,10 +1,9 @@
 import matplotlib.pyplot as plt
 
 
-def plot_spectogram(t, f, magnitude_db, song_name):
+def plot_spectrogram(t, f, magnitude_db, song_name):
 
     fig, ax = plt.subplots()
-
     mesh = ax.pcolormesh(
         t,
         f,
@@ -28,3 +27,6 @@ def plot_spectogram(t, f, magnitude_db, song_name):
     )
 
     return fig, ax
+
+def update_cursor(cursor, elapsed):
+    cursor.set_xdata([elapsed, elapsed])

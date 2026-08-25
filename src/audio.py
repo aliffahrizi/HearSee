@@ -11,4 +11,6 @@ def play_audio(audio, sample_rate):
 def wait_audio():
     sd.wait()
     
-    
+def get_audio_duration(audio, sample_rate):
+    duration = len(audio) / sample_rate
+    return duration
