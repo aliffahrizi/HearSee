@@ -5,6 +5,7 @@ import sounddevice as sd
 from scipy.signal import stft
 import time
 from pathlib import Path
+from analysis import calculate_stft
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 audio_path = BASE_DIR / "audio" / "The xx - Intro.flac"
@@ -24,14 +25,7 @@ x = audio[:n_samples, :]
 x_left = audio[:n_samples, 0]
 x_right = audio[:n_samples, 1]
 
-f, t, Zxx = stft(
-    x_right,
-    fs=sampleRate,
-    nperseg=2048,
-    noverlap=1024
-)
-
-magnitude_db = 20 * np.log10(np.abs(Zxx) + 1e-10)
+f, t, magnitude_db = calculate_stft(x_left, sampleRate)
 
 fig, ax = plt.subplots()
 
