@@ -4,7 +4,7 @@ import time
 from pathlib import Path
 from analysis import calculate_stft
 from audio import *
-from visualization import plot_spectrogram
+from visualization import plot_spectogram
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 audio_path = BASE_DIR / "audio" / "The xx - Intro.flac"
@@ -30,7 +30,7 @@ fig, ax = plot_spectogram(t, f, magnitude_db, song_name)
 
 fig.subplots_adjust(bottom=0.22)
 info_text = ax.text(
-    0.02, -0.15,
+    -0.12, -0.075,
     "",
     transform=ax.transAxes,
     verticalalignment="top"

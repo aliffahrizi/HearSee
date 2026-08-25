@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 
 
-def plot_spectrogram(t, f, magnitude_db, song_name):
+def plot_spectogram(t, f, magnitude_db, song_name):
 
     fig, ax = plt.subplots()
 
