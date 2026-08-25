@@ -4,6 +4,7 @@ import time
 from pathlib import Path
 from analysis import calculate_stft
 from audio import *
+from visualization import plot_spectrogram
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 audio_path = BASE_DIR / "audio" / "The xx - Intro.flac"
@@ -18,34 +19,14 @@ print(f'Sample rate: {sampleRate}')
 duration = 5
 n_samples = int(duration * sampleRate)
 
-# Audio separation for 10 secs
 x = audio[:n_samples, :]
 x_left = audio[:n_samples, 0]
 x_right = audio[:n_samples, 1]
 
 f, t, magnitude_db = calculate_stft(x_left, sampleRate)
 
-fig, ax = plt.subplots()
+fig, ax = plot_spectogram(t, f, magnitude_db, song_name)
 
-mesh = ax.pcolormesh(
-    t,
-    f,
-    magnitude_db,
-    shading="gouraud",
-    cmap="inferno",
-    vmin=-120,
-    vmax=0
-)
-
-cursor = ax.axvline(0)
-
-ax.set_xlabel("Time (s)")
-ax.set_ylabel("Frequency (Hz)")
-ax.set_yscale("log")
-ax.set_ylim(20, 20000)
-ax.set_title(song_name)
-
-fig.colorbar(mesh, ax=ax, label="Magnitude (dB)")
 
 fig.subplots_adjust(bottom=0.22)
 info_text = ax.text(
