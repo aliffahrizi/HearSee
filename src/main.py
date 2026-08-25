@@ -1,18 +1,16 @@
-import soundfile as sf
 import matplotlib.pyplot as plt
 import numpy as np
-import sounddevice as sd
-from scipy.signal import stft
 import time
 from pathlib import Path
 from analysis import calculate_stft
+from audio import *
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 audio_path = BASE_DIR / "audio" / "The xx - Intro.flac"
 
 song_name = 'Intro'
 
-audio, sampleRate = sf.read(audio_path)
+audio, sampleRate = load_audio(audio_path)
 
 print(f'Audio shape: {audio.shape}')
 print(f'Sample rate: {sampleRate}')
